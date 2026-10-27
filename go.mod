@@ -1,4 +1,4 @@
-module github.com/elliottsam/kubectl-schematree
+module github.com/elliottsam/kubectl-schema-tree
 
 go 1.27.3
 

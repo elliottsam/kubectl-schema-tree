@@ -6,7 +6,7 @@ import (
 
 	"charm.land/lipgloss/v2"
 
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 // syncDetail refreshes the detail viewport when the selection changes.

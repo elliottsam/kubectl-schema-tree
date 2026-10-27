@@ -14,7 +14,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/openapi"
 
-	s "github.com/elliottsam/kubectl-schematree/internal/schema"
+	s "github.com/elliottsam/kubectl-schema-tree/internal/schema"
 )
 
 // fakeDiscovery serves canned OpenAPI v3 documents.

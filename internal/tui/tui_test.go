@@ -11,8 +11,8 @@ import (
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	k8sschema "k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schematest"
-	"github.com/elliottsam/kubectl-schematree/internal/tui"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schematest"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tui"
 )
 
 func TestNewValidatesConfig(t *testing.T) {

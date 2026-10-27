@@ -3,8 +3,8 @@ package tree_test
 import (
 	"testing"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schematest"
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schematest"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 func TestFromSchemaLazyChildren(t *testing.T) {

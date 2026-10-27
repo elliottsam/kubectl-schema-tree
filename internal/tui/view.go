@@ -8,8 +8,8 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 // View implements tea.Model.

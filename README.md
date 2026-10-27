@@ -19,14 +19,18 @@ kubectl krew install schema-tree
 ```
 
 From a release: download the archive for your platform from the
-[releases page](https://github.com/elliottsam/kubectl-schematree/releases) and
+[releases page](https://github.com/elliottsam/kubectl-schema-tree/releases) and
 put `kubectl-schema_tree` somewhere on your `PATH`.
 
 From source:
 
 ```sh
-go install github.com/elliottsam/kubectl-schematree/cmd/kubectl-schema_tree@latest
+go install github.com/elliottsam/kubectl-schema-tree/cmd/kubectl-schema_tree@latest
 ```
+
+Use the full path including `/cmd/kubectl-schema_tree`. The repository root has
+no `main` package, so `go install github.com/elliottsam/kubectl-schema-tree@latest`
+fails with "module ... found, but does not contain package".
 
 kubectl discovers the plugin through the binary name, so it must be called
 `kubectl-schema_tree` (the underscore becomes the dash in `schema-tree`).

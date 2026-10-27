@@ -6,7 +6,7 @@ import (
 
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/elliottsam/kubectl-schematree/internal/cli"
+	"github.com/elliottsam/kubectl-schema-tree/internal/cli"
 )
 
 // version is set at build time with -ldflags "-X main.version=...".

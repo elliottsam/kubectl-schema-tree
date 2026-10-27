@@ -4,7 +4,7 @@ metadata:
   name: schema-tree
 spec:
   version: {{ .TagName }}
-  homepage: https://github.com/elliottsam/kubectl-schematree
+  homepage: https://github.com/elliottsam/kubectl-schema-tree
   shortDescription: Browse Kubernetes API schemas in an interactive tree
   description: |
     Explore the OpenAPI v3 schemas served by your cluster in a terminal UI.
@@ -14,25 +14,25 @@ spec:
   platforms:
     - selector:
         matchLabels: {os: linux, arch: amd64}
-      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_linux_amd64.tar.gz" .TagName | indent 6}}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schema-tree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_linux_amd64.tar.gz" .TagName | indent 6}}
       bin: kubectl-schema_tree
     - selector:
         matchLabels: {os: linux, arch: arm64}
-      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_linux_arm64.tar.gz" .TagName | indent 6}}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schema-tree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_linux_arm64.tar.gz" .TagName | indent 6}}
       bin: kubectl-schema_tree
     - selector:
         matchLabels: {os: darwin, arch: amd64}
-      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_darwin_amd64.tar.gz" .TagName | indent 6}}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schema-tree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_darwin_amd64.tar.gz" .TagName | indent 6}}
       bin: kubectl-schema_tree
     - selector:
         matchLabels: {os: darwin, arch: arm64}
-      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_darwin_arm64.tar.gz" .TagName | indent 6}}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schema-tree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_darwin_arm64.tar.gz" .TagName | indent 6}}
       bin: kubectl-schema_tree
     - selector:
         matchLabels: {os: windows, arch: amd64}
-      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_windows_amd64.zip" .TagName | indent 6}}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schema-tree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_windows_amd64.zip" .TagName | indent 6}}
       bin: kubectl-schema_tree.exe
     - selector:
         matchLabels: {os: windows, arch: arm64}
-      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_windows_arm64.zip" .TagName | indent 6}}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schema-tree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_windows_arm64.zip" .TagName | indent 6}}
       bin: kubectl-schema_tree.exe

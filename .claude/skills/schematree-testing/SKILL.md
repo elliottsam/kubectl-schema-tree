@@ -1,7 +1,7 @@
 ---
 name: schematree-testing
 description: >
-  Project testing conventions for kubectl-schematree. Use whenever writing or
+  Project testing conventions for kubectl-schema-tree. Use whenever writing or
   changing Go tests, golden files, fuzz targets, benchmarks, Bubble Tea model
   tests, view snapshots, Kubernetes OpenAPI fixtures or fakes, or when
   checking coverage and the finishing test commands. Extends go-style-guide.

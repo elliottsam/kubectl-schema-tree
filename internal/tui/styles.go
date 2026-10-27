@@ -5,7 +5,7 @@ import (
 
 	"charm.land/lipgloss/v2"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
 )
 
 // Styles holds every lipgloss style used by the views. Views never build
