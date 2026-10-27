@@ -1,0 +1,26 @@
+{
+  "schematree-testing": [
+    {"query": "Add golden-file tests for the tree view rendering.", "should_trigger": true},
+    {"query": "Write a fuzz test for the OpenAPI schema parser.", "should_trigger": true},
+    {"query": "Test that the selected row highlight spans the full pane width.", "should_trigger": true},
+    {"query": "What coverage do we require before merging?", "should_trigger": true},
+    {"query": "Write pytest tests for this Python module.", "should_trigger": false},
+    {"query": "Update the README install section.", "should_trigger": false}
+  ],
+  "bubbletea-tui": [
+    {"query": "Add a detail pane that scrolls independently of the tree.", "should_trigger": true},
+    {"query": "Make hjkl navigate the tree and highlight the selected node.", "should_trigger": true},
+    {"query": "The TUI freezes when I expand a group; fix the Update loop.", "should_trigger": true},
+    {"query": "Add a lipgloss style for deprecated fields.", "should_trigger": true},
+    {"query": "Build a React component for a sidebar tree.", "should_trigger": false},
+    {"query": "Configure GoReleaser for linux and darwin builds.", "should_trigger": false}
+  ],
+  "kubernetes-client": [
+    {"query": "Load the apps/v1 OpenAPI v3 document lazily.", "should_trigger": true},
+    {"query": "Handle a 403 from the discovery client gracefully.", "should_trigger": true},
+    {"query": "Resolve $ref pointers in a CRD schema without infinite recursion.", "should_trigger": true},
+    {"query": "Wire up --context and --kubeconfig flags using cli-runtime.", "should_trigger": true},
+    {"query": "Write a Terraform module for an EKS cluster.", "should_trigger": false},
+    {"query": "Add a progress spinner to the status bar.", "should_trigger": false}
+  ]
+}

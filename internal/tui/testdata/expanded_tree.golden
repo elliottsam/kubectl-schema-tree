@@ -1,0 +1,30 @@
+ schema-tree · ctx: test                                                                            
+╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ ▸ v1                                           ││ Widget.spec.color                              │
+│ ▾ apps/v1                                      ││ apps/v1/Widget                                 │
+│   ▸ Gadget  <Gadget>                           ││                                                │
+│   ▾ Widget  <Widget>                           ││ string · optional                              │
+│       metadata  <object>                       ││ enum: red, green                               │
+│     ▾ spec *  <WidgetSpec>                     ││                                                │
+│         color  string                          ││ Paint colour.                                  │
+│         replicas *  integer                    ││                                                │
+│         tags  <[]string>                       ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+ ↑/k up • ↓/j down • ←/h collapse • →/l expand • / search • tab switch pane • ? help • q quit       

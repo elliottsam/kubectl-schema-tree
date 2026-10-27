@@ -1,0 +1,2 @@
+go test fuzz v1
+[]byte("{\"components\":{\"schemas\":{\"%\":{\"x-kubernetes-group-version-kind\":[{\"00000\":\"\",\"version\":\"v1\",\"kind\":\"0\"}],\"0000000000\":{\"0\":{\"0000\":\"0000000000000000000000\"}}}}}}")

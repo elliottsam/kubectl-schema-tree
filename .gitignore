@@ -1,0 +1,6 @@
+PLAN.md
+bin/
+dist/
+cover.txt
+*.out
+.idea/

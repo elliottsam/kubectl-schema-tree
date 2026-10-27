@@ -1,0 +1,42 @@
+version: 2
+project_name: kubectl-schema_tree
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: kubectl-schema_tree
+    main: ./cmd/kubectl-schema_tree
+    binary: kubectl-schema_tree
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+
+archives:
+  - id: default
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    # Krew's manifest refers to these names; keep .krew.yaml in step.
+    name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+
+checksum:
+  name_template: checksums.txt
+
+sboms:
+  - artifacts: archive
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"

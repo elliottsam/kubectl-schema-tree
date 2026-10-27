@@ -1,0 +1,38 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: schema-tree
+spec:
+  version: {{ .TagName }}
+  homepage: https://github.com/elliottsam/kubectl-schematree
+  shortDescription: Browse Kubernetes API schemas in an interactive tree
+  description: |
+    Explore the OpenAPI v3 schemas served by your cluster in a terminal UI.
+    Navigate resources and fields as a colourised tree with arrow keys or
+    hjkl, read field documentation in a detail pane, and fuzzy-search kinds
+    and field paths. Requires a cluster running Kubernetes 1.27 or newer.
+  platforms:
+    - selector:
+        matchLabels: {os: linux, arch: amd64}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_linux_amd64.tar.gz" .TagName | indent 6}}
+      bin: kubectl-schema_tree
+    - selector:
+        matchLabels: {os: linux, arch: arm64}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_linux_arm64.tar.gz" .TagName | indent 6}}
+      bin: kubectl-schema_tree
+    - selector:
+        matchLabels: {os: darwin, arch: amd64}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_darwin_amd64.tar.gz" .TagName | indent 6}}
+      bin: kubectl-schema_tree
+    - selector:
+        matchLabels: {os: darwin, arch: arm64}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_darwin_arm64.tar.gz" .TagName | indent 6}}
+      bin: kubectl-schema_tree
+    - selector:
+        matchLabels: {os: windows, arch: amd64}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_windows_amd64.zip" .TagName | indent 6}}
+      bin: kubectl-schema_tree.exe
+    - selector:
+        matchLabels: {os: windows, arch: arm64}
+      {{addURIAndSha "https://github.com/elliottsam/kubectl-schematree/releases/download/{{ .TagName }}/kubectl-schema_tree_{{ .TagName }}_windows_arm64.zip" .TagName | indent 6}}
+      bin: kubectl-schema_tree.exe

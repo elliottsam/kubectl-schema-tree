@@ -1,0 +1,30 @@
+ schema-tree · ctx: test                                                                            
+╭────────────────────────────────────────────────╮╭────────────────────────────────────────────────╮
+│ ▾ apps/v1                                      ││ Gadget.replicas                                │
+│   ▾ Gadget  <Gadget>                           ││ apps/v1/Gadget                                 │
+│       replicas  integer                        ││                                                │
+│   ▾ Widget  <Widget>                           ││ integer (int32) · optional                     │
+│     ▾ spec *  <WidgetSpec>                     ││ default: 1                                     │
+│         replicas *  integer                    ││                                                │
+│                                                ││ Desired count.                                 │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+│                                                ││                                                │
+╰────────────────────────────────────────────────╯╰────────────────────────────────────────────────╯
+/ replicas                                                                       2 matches          
