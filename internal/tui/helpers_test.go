@@ -1,6 +1,7 @@
 package tui_test
 
 import (
+	"bytes"
 	"flag"
 	"os"
 	"path/filepath"
@@ -179,6 +180,8 @@ func golden(t *testing.T, name, got string) {
 	if err != nil {
 		t.Fatalf("read golden (run with -update): %v", err)
 	}
+	// Tolerate CRLF so a Windows checkout with autocrlf still compares equal.
+	want = bytes.ReplaceAll(want, []byte("\r\n"), []byte("\n"))
 	if diff := cmp.Diff(strings.TrimRight(string(want), "\n"), strings.TrimRight(got, "\n")); diff != "" {
 		t.Fatalf("view differs from %s (-want +got):\n%s", path, diff)
 	}
