@@ -1,0 +1,73 @@
+name: tag
+
+# Every push to main (that is, every merged pull request) creates the next
+# version tag and releases it. The bump comes from a "Release: patch|minor|major"
+# line in the pull request description and defaults to patch; "Release: none"
+# skips the release.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# Serialise so two quick merges cannot compute the same version.
+concurrency:
+  group: tag
+  cancel-in-progress: false
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+      - name: Create the next tag
+        id: tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          if git tag --points-at "$GITHUB_SHA" | grep -q '^v'; then
+            echo "commit already has a release tag; nothing to do"
+            exit 0
+          fi
+
+          # The description is only written to a file and parsed, never
+          # interpolated into a shell command.
+          gh api "repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA/pulls" \
+            --jq '.[0].body // ""' > "$RUNNER_TEMP/pr-body.txt"
+
+          tag=$(go run ./hack/nextversion -body-file "$RUNNER_TEMP/pr-body.txt")
+          if [ -z "$tag" ]; then
+            echo "PR description says Release: none; not tagging"
+            echo "Release skipped (Release: none)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$tag" -m "$tag" "$GITHUB_SHA"
+          git push origin "$tag"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Created $tag" >> "$GITHUB_STEP_SUMMARY"
+
+  release:
+    needs: tag
+    if: needs.tag.outputs.tag != ''
+    permissions:
+      contents: write
+    uses: ./.github/workflows/release.yml
+    with:
+      tag: ${{ needs.tag.outputs.tag }}
+    secrets: inherit
