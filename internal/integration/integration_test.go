@@ -17,8 +17,8 @@ import (
 	"github.com/charmbracelet/x/ansi"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
-	"github.com/elliottsam/kubectl-schematree/internal/tui"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tui"
 )
 
 func newLoader(t *testing.T) *schema.Loader {

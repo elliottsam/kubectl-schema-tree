@@ -6,7 +6,7 @@ import (
 
 	"github.com/sahilm/fuzzy"
 
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 // DefaultMaxResults bounds the number of results returned for one query.

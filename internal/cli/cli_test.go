@@ -16,10 +16,10 @@ import (
 	k8sschema "k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/elliottsam/kubectl-schematree/internal/cli"
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
-	"github.com/elliottsam/kubectl-schematree/internal/schematest"
-	"github.com/elliottsam/kubectl-schematree/internal/tui"
+	"github.com/elliottsam/kubectl-schema-tree/internal/cli"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schematest"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tui"
 )
 
 type env struct {

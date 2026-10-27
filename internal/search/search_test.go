@@ -5,9 +5,9 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schematest"
-	"github.com/elliottsam/kubectl-schematree/internal/search"
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schematest"
+	"github.com/elliottsam/kubectl-schema-tree/internal/search"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 func loadedRoots(tb testing.TB) []*tree.Node {

@@ -14,9 +14,9 @@ import (
 	"charm.land/bubbles/v2/viewport"
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
-	"github.com/elliottsam/kubectl-schematree/internal/search"
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/search"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 // searchSummaryWidth is the footer space reserved for the match count.

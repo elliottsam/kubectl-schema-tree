@@ -1,10 +1,10 @@
-# kubectl-schematree
+# kubectl-schema-tree
 
 A kubectl plugin (`kubectl schema-tree`) written in Go. It connects to a
 Kubernetes cluster, reads OpenAPI v3 schemas and lets the user explore them in a
 Bubble Tea tree TUI.
 
-- Module: `github.com/elliottsam/kubectl-schematree`
+- Module: `github.com/elliottsam/kubectl-schema-tree`
 - Binary: `kubectl-schema_tree`
 
 ## Skills (read before working)

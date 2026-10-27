@@ -17,8 +17,8 @@ import (
 	"github.com/spf13/cobra"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
-	"github.com/elliottsam/kubectl-schematree/internal/tui"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tui"
 )
 
 // Connection is a schema source plus the Kubernetes context it talks to.

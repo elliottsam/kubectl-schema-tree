@@ -2,7 +2,7 @@ SHELL := /bin/bash
 .SHELLFLAGS := -o pipefail -c
 
 BINARY   := kubectl-schema_tree
-PKG      := github.com/elliottsam/kubectl-schematree
+PKG      := github.com/elliottsam/kubectl-schema-tree
 VERSION  ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 COVER_MIN ?= 85
 CONTEXT  ?= kind-schematree

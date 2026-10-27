@@ -3,7 +3,7 @@
 // terminal or network dependencies.
 package tree
 
-import "github.com/elliottsam/kubectl-schematree/internal/schema"
+import "github.com/elliottsam/kubectl-schema-tree/internal/schema"
 
 // LoadState tracks lazy loading of a group/version node.
 type LoadState int

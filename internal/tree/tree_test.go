@@ -6,7 +6,7 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/elliottsam/kubectl-schematree/internal/tree"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tree"
 )
 
 // build returns:

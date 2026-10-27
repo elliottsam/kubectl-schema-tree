@@ -1,7 +1,7 @@
 ---
 name: kubernetes-client
 description: >
-  How kubectl-schematree talks to Kubernetes. Use whenever touching
+  How kubectl-schema-tree talks to Kubernetes. Use whenever touching
   client-go, cli-runtime ConfigFlags, discovery, the OpenAPI v3 endpoint,
   kube-openapi spec3, $ref resolution, CRD schemas, x-kubernetes extensions,
   or mapping cluster errors such as RBAC 403 and pre-1.27 clusters.

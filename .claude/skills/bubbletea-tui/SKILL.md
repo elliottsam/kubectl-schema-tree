@@ -1,7 +1,7 @@
 ---
 name: bubbletea-tui
 description: >
-  Conventions for building the kubectl-schematree terminal UI with Bubble Tea,
+  Conventions for building the kubectl-schema-tree terminal UI with Bubble Tea,
   Bubbles and Lip Gloss. Use whenever writing or changing a tea.Model, Update,
   View, tea.Cmd, key bindings, styles, the tree or detail panes, search input,
   focus handling, window resizing, or the selected-node highlight.

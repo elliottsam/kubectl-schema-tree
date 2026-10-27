@@ -9,7 +9,7 @@ import (
 
 	"k8s.io/client-go/openapi"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schema"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schema"
 )
 
 // Docs is a small two-group document set:

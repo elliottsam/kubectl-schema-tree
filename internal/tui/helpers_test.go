@@ -14,8 +14,8 @@ import (
 	"github.com/charmbracelet/x/ansi"
 	"github.com/google/go-cmp/cmp"
 
-	"github.com/elliottsam/kubectl-schematree/internal/schematest"
-	"github.com/elliottsam/kubectl-schematree/internal/tui"
+	"github.com/elliottsam/kubectl-schema-tree/internal/schematest"
+	"github.com/elliottsam/kubectl-schema-tree/internal/tui"
 )
 
 var update = flag.Bool("update", false, "rewrite golden files")
