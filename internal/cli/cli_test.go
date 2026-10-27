@@ -12,6 +12,8 @@ import (
 	"charm.land/bubbles/v2/spinner"
 	tea "charm.land/bubbletea/v2"
 	"github.com/charmbracelet/x/ansi"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
+	k8sschema "k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 
 	"github.com/elliottsam/kubectl-schematree/internal/cli"
@@ -306,5 +308,52 @@ func TestConnectReadsContext(t *testing.T) {
 				t.Fatalf("Connection = %+v, want context %q", conn, tt.want)
 			}
 		})
+	}
+}
+
+func TestForbiddenClusterGivesActionableError(t *testing.T) {
+	t.Parallel()
+	e := newEnv(t)
+	d := schematest.NewDiscovery()
+	d.PathsErr = apierrors.NewForbidden(k8sschema.GroupResource{Resource: "openapi"}, "v3", errors.New("denied"))
+	e.cfg.Connect = func(*genericclioptions.ConfigFlags) (cli.Connection, error) {
+		return cli.Connection{Source: schematest.Loader(t, d), Context: "locked"}, nil
+	}
+	err := e.execute(t)
+	if !errors.Is(err, schema.ErrForbidden) || !strings.Contains(err.Error(), "RBAC") {
+		t.Fatalf("err = %v", err)
+	}
+}
+
+func TestOtherClusterErrorsPassThrough(t *testing.T) {
+	t.Parallel()
+	boom := errors.New("connection refused")
+	e := newEnv(t)
+	d := schematest.NewDiscovery()
+	d.PathsErr = boom
+	e.cfg.Connect = func(*genericclioptions.ConfigFlags) (cli.Connection, error) {
+		return cli.Connection{Source: schematest.Loader(t, d), Context: "down"}, nil
+	}
+	err := e.execute(t)
+	if !errors.Is(err, boom) || strings.Contains(err.Error(), "RBAC") || strings.Contains(err.Error(), "1.27") {
+		t.Fatalf("err = %v, want the original error without extra advice", err)
+	}
+}
+
+// TestDefaultsApplied builds the command from only the required fields, as
+// main does, and checks it still works.
+func TestDefaultsApplied(t *testing.T) {
+	t.Parallel()
+	var out bytes.Buffer
+	cmd := cli.NewCommand(cli.Config{
+		Streams: genericclioptions.IOStreams{In: strings.NewReader(""), Out: &out, ErrOut: &out},
+		Version: "v9",
+	})
+	cmd.SetArgs([]string{"--version"})
+	if err := cmd.Execute(); err != nil {
+		t.Fatal(err)
+	}
+	if out.String() != "kubectl-schema_tree v9\n" {
+		t.Fatalf("output = %q", out.String())
 	}
 }
