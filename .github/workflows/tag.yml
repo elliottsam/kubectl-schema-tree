@@ -2,7 +2,8 @@ name: tag
 
 # Every push to main (that is, every merged pull request) creates the next
 # version tag and releases it. The bump comes from a "Release: patch|minor|major"
-# line in the pull request description and defaults to patch.
+# line in the pull request description and defaults to patch; "Release: none"
+# skips the release.
 on:
   push:
     branches: [main]
@@ -48,6 +49,11 @@ jobs:
             --jq '.[0].body // ""' > "$RUNNER_TEMP/pr-body.txt"
 
           tag=$(go run ./hack/nextversion -body-file "$RUNNER_TEMP/pr-body.txt")
+          if [ -z "$tag" ]; then
+            echo "PR description says Release: none; not tagging"
+            echo "Release skipped (Release: none)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

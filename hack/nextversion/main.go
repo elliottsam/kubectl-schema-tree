@@ -1,4 +1,5 @@
-// Command nextversion prints the next release tag. It reads the existing tags
+// Command nextversion prints the next release tag, or nothing when the pull
+// request opted out with "Release: none". It reads the existing tags
 // from the current git repository and the pull request description from the
 // file named by -body-file ("-" for stdin, omitted for none).
 package main
@@ -36,9 +37,11 @@ func run(bodyFile string) error {
 	tags := strings.Fields(string(out))
 
 	bump := release.BumpFromDescription(body)
-	next := release.Next(tags, bump)
 	fmt.Fprintf(os.Stderr, "bump: %s\n", bump)
-	fmt.Println(next)
+	if bump == release.None {
+		return nil
+	}
+	fmt.Println(release.Next(tags, bump))
 	return nil
 }
 

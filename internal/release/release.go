@@ -1,7 +1,8 @@
 // Package release computes the next version tag for a merged pull request.
 //
-// The bump is read from a "Release: patch|minor|major" line in the pull
-// request description and defaults to patch.
+// The bump is read from a "Release: patch|minor|major|none" line in the pull
+// request description and defaults to patch. "none" opts the change out of
+// releasing.
 package release
 
 import (
@@ -13,11 +14,14 @@ import (
 // Bump is the kind of version increase a release makes.
 type Bump int
 
-// Bumps in increasing order of significance.
+// Bumps. Patch, Minor and Major are in increasing order of significance. None
+// is not a bump: it means the change must not be released, and it overrides
+// the others.
 const (
 	Patch Bump = iota
 	Minor
 	Major
+	None
 )
 
 // String returns the lower-case name of the bump.
@@ -27,6 +31,8 @@ func (b Bump) String() string {
 		return "minor"
 	case Major:
 		return "major"
+	case None:
+		return "none"
 	default:
 		return "patch"
 	}
@@ -37,19 +43,22 @@ var (
 	// releaseLine matches a whole line such as "Release: minor". Allowing \r
 	// handles the CRLF line endings GitHub stores for descriptions typed in
 	// the browser.
-	releaseLine = regexp.MustCompile(`(?im)^[ \t]*release:[ \t]*(major|minor|patch)[ \t\r]*$`)
+	releaseLine = regexp.MustCompile(`(?im)^[ \t]*release:[ \t]*(major|minor|patch|none)[ \t\r]*$`)
 	versionTag  = regexp.MustCompile(`^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$`)
 )
 
 // BumpFromDescription returns the bump requested by a pull request
 // description. HTML comments are ignored so a template can list the options
 // without selecting one. If several lines are present the most significant
-// wins; with none, the result is Patch.
+// wins, except that "none" overrides everything: not releasing is easy to
+// correct, publishing a release is not. With no line, the result is Patch.
 func BumpFromDescription(body string) Bump {
 	body = htmlComment.ReplaceAllString(body, "")
 	bump := Patch
 	for _, m := range releaseLine.FindAllStringSubmatch(body, -1) {
 		switch lower(m[1]) {
+		case "none":
+			return None
 		case "major":
 			bump = max(bump, Major)
 		case "minor":
@@ -95,8 +104,11 @@ func Parse(tag string) (Version, bool) {
 
 // Bump returns the version after applying b. A major bump resets minor and
 // patch; a minor bump resets patch.
+// None leaves the version unchanged.
 func (v Version) Bump(b Bump) Version {
 	switch b {
+	case None:
+		return v
 	case Major:
 		return Version{v.Major + 1, 0, 0}
 	case Minor:

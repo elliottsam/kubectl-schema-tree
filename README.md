@@ -118,10 +118,12 @@ description:
 Release: patch   (default)
 Release: minor
 Release: major
+Release: none    (merge without tagging or releasing)
 ```
 
 The pull request template includes the line. The most significant bump wins if
-several are present, and text inside `<!-- -->` comments is ignored. The
+several are present, but `none` overrides everything: not releasing is easy to
+fix, publishing is not. Text inside `<!-- -->` comments is ignored. The
 version logic is in `internal/release`, run by `.github/workflows/tag.yml`,
 which then calls `release.yml` (GoReleaser).
 

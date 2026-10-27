@@ -54,8 +54,9 @@ make bench
 `main` is protected: every change goes through a pull request and the
 `CI passed` check. Merging creates and publishes the next release tag
 automatically, so every PR description must contain one line, `Release: patch`,
-`Release: minor` or `Release: major` (the template has it; patch is the default).
-Choose minor for new user-visible features and major for breaking changes.
+`Release: minor`, `Release: major` or `Release: none` (the template has it; patch is
+the default). Choose minor for new user-visible features, major for breaking
+changes, and none for changes that should not ship (docs, CI, tests only).
 
 ## Package map
 

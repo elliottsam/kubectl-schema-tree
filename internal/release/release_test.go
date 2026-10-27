@@ -28,6 +28,12 @@ func TestBumpFromDescription(t *testing.T) {
 		{"unknown-value", "Release: huge", release.Patch},
 		{"extra-text-after", "Release: minor because reasons", release.Patch},
 		{"prefix-text", "Next Release: major", release.Patch},
+		{"none", "Release: none", release.None},
+		{"none-case-insensitive", "RELEASE: None\r\n", release.None},
+		{"none-overrides-major", "Release: major\nRelease: none", release.None},
+		{"none-before-major", "Release: none\nRelease: major", release.None},
+		{"none-in-comment-ignored", "<!-- Release: none -->\nRelease: minor", release.Minor},
+		{"none-in-prose", "There is none to release: none of it.", release.Patch},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -83,6 +89,7 @@ func TestNext(t *testing.T) {
 		{"picks-highest-numerically", []string{"v0.9.0", "v0.10.0", "v0.2.0"}, release.Patch, "v0.10.1"},
 		{"order-independent", []string{"v1.0.0", "v0.9.9"}, release.Minor, "v1.1.0"},
 		{"ignores-prerelease-above", []string{"v1.2.3", "v2.0.0-rc1"}, release.Patch, "v1.2.4"},
+		{"none-keeps-version", []string{"v1.2.3"}, release.None, "v1.2.3"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -96,7 +103,7 @@ func TestNext(t *testing.T) {
 
 func TestBumpString(t *testing.T) {
 	t.Parallel()
-	for b, want := range map[release.Bump]string{release.Patch: "patch", release.Minor: "minor", release.Major: "major"} {
+	for b, want := range map[release.Bump]string{release.Patch: "patch", release.Minor: "minor", release.Major: "major", release.None: "none"} {
 		if got := b.String(); got != want {
 			t.Errorf("%d.String() = %q, want %q", b, got, want)
 		}
@@ -108,7 +115,7 @@ func FuzzBumpFromDescription(f *testing.F) {
 	f.Add("<!-- Release: major -->")
 	f.Add("\r\n\r\nrelease:\tmajor\r\n")
 	f.Fuzz(func(t *testing.T, body string) {
-		if b := release.BumpFromDescription(body); b < release.Patch || b > release.Major {
+		if b := release.BumpFromDescription(body); b < release.Patch || b > release.None {
 			t.Fatalf("out-of-range bump %d", b)
 		}
 	})
