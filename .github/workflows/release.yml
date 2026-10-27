@@ -1,8 +1,17 @@
 name: release
 
+# Runs for a manually pushed v* tag, or is called by tag.yml after it creates a
+# tag. Tags pushed with GITHUB_TOKEN do not trigger workflows, so tag.yml has to
+# call this workflow directly.
 on:
   push:
     tags: ["v*"]
+  workflow_call:
+    inputs:
+      tag:
+        description: Existing tag to release
+        type: string
+        required: true
 
 permissions:
   contents: write
@@ -13,6 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ inputs.tag || github.ref }}
           fetch-depth: 0
       - uses: actions/setup-go@v7
         with:
@@ -24,10 +34,13 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_CURRENT_TAG: ${{ inputs.tag || github.ref_name }}
 
   # The bot only updates plugins already in krew-index and opens a PR there.
   # After the first manual submission, set the repository variable
-  # KREW_ENABLED=true to turn this on.
+  # KREW_ENABLED=true to turn this on. The bot derives the version from the
+  # triggering ref, so check it still works when this workflow is called from
+  # tag.yml (where the ref is main) before enabling it.
   krew:
     needs: goreleaser
     if: vars.KREW_ENABLED == 'true'

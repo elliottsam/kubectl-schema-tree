@@ -108,5 +108,22 @@ internal/schematest       fakes and documents for tests
 internal/integration      tests against a real cluster (build tag)
 ```
 
+## Releasing
+
+Every merge to `main` creates the next version tag and publishes a release; there
+is no manual tagging. The bump is read from a line in the pull request
+description:
+
+```text
+Release: patch   (default)
+Release: minor
+Release: major
+```
+
+The pull request template includes the line. The most significant bump wins if
+several are present, and text inside `<!-- -->` comments is ignored. The
+version logic is in `internal/release`, run by `.github/workflows/tag.yml`,
+which then calls `release.yml` (GoReleaser).
+
 Contributor and agent conventions live in [CLAUDE.md](CLAUDE.md) and
 `.claude/skills/`.

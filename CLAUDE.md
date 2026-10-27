@@ -49,6 +49,14 @@ make fuzz               # short fuzz run on parsers
 make bench
 ```
 
+## Pull requests and releases
+
+`main` is protected: every change goes through a pull request and the
+`CI passed` check. Merging creates and publishes the next release tag
+automatically, so every PR description must contain one line, `Release: patch`,
+`Release: minor` or `Release: major` (the template has it; patch is the default).
+Choose minor for new user-visible features and major for breaking changes.
+
 ## Package map
 
 ```text
@@ -57,6 +65,7 @@ internal/cli              cobra command, kubectl flags, debug log file, Connect/
 internal/schema           Loader, lazy Node tree, sentinel errors
 internal/tree             pure navigation state (expand, cursor, filter)
 internal/search           fuzzy matching over loaded nodes
+internal/release          next version tag from the PR description (used by hack/nextversion)
 internal/tui              Bubble Tea v2 model, views, KeyMap, Styles
 internal/schematest       fake discovery and small documents for tests
 internal/integration      //go:build integration, needs KUBECTL_SCHEMATREE_CONTEXT
